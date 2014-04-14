@@ -3,4 +3,6 @@ class Car < ActiveRecord::Base
   validates :year, presence: true
   validates :mileage, presence: true
   validates :year, :inclusion => 1980..Time.now.year
+
+  belongs_to :manufacturer
 end

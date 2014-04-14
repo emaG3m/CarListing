@@ -6,4 +6,8 @@ describe Manufacturer do
     it { should validate_presence_of(:country) }
   end
 
+  context "associations" do
+    it { should have_many(:cars) }
+  end
+
 end

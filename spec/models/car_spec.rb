@@ -9,6 +9,10 @@ describe Car do
     it { should_not have_valid(:year).when(1979, 1880, next_year) }
     it { should have_valid(:year).when(1980, 2014, 1997, 2000) }
   end
+
+  context "associations" do
+    it { should belong_to(:manufacturer) }
+  end
 end
 
 

@@ -3,5 +3,6 @@
   <%= f.input :year, required: true %>
   <%= f.input :mileage, required: true %>
   <%= f.input :description %>
+  <%= f.association :manufacturer, label_method: :name%>
   <%= f.button :submit %>
 <%- end -%>
