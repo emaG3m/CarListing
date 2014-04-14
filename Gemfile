@@ -1,5 +1,25 @@
 source 'https://rubygems.org'
 
+gem 'simple_form'
+gem 'foundation-rails'
+
+group :development do
+  gem 'quiet_assets'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'shoulda'
+  gem 'launchy'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'pry-rails'
+  gem 'valid_attribute'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
