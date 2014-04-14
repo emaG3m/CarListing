@@ -1,0 +1,7 @@
+<%= simple_form_for @car do |f| %>
+  <%= f.input :color, required: true %>
+  <%= f.input :year, required: true %>
+  <%= f.input :mileage, required: true %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
+<%- end -%>

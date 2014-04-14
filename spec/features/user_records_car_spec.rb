@@ -23,21 +23,34 @@ feature "User records a newly acquired car", %Q{
     fill_in 'Year',       with: car.year
     fill_in 'Mileage',    with: car.mileage
     fill_in 'Description',with: car.description
-    click_button "Save Car"
+    click_button "Create Car"
 
-    expect(current_page).to eql(new_car_path)
+    expect(current_path).to eql(new_car_path)
     expect(page).to have_content("You successfully recorded a car")
     expect(Car.count).to eql(prev_count + 1)
+  end
+
+  scenario "A car is created with an invalid year" do
+    prev_count = Car.count
+    car = FactoryGirl.build(:car, year: 1977)
+    visit new_car_path
+
+    fill_in 'Color',      with: car.color
+    fill_in 'Year',       with: car.year
+    fill_in 'Mileage',    with: car.mileage
+    fill_in 'Description',with: car.description
+    click_button "Create Car"
+
+    expect(page).to have_content("Please fill in the required fields with the valid information.")
+    expect(Car.count).to eql(prev_count)
   end
 
   scenario "A car is not created without the required information" do
     prev_count = Car.count
     visit new_car_path
 
-    click_button "Save Car"
-
-    expect(current_page).to eql(new_car_path)
-    expect(page).to have_content("Please fill in the required fields.")
+    click_button "Create Car"
+    expect(page).to have_content("Please fill in the required fields with the valid information.")
     expect(page).to have_content("can't be blank")
     expect(Car.count).to eql(prev_count)
   end
