@@ -1,0 +1,4 @@
+<%= @manufacturers.each do |manufacturer| %>
+  <%=manufacturer.name%>
+  <%= link_to "Destroy #{manufacturer.name}", manufacturer, method: :delete%>
+<%- end -%>

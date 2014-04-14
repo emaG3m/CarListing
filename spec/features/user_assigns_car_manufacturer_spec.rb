@@ -27,4 +27,21 @@ feature "user can associate a manufacturer with a car", %Q{
     expect(Car.count).to eq(prev_count + 1)
     expect(Car.last.manufacturer).to eql(manufacturer)
   end
+
+  scenario "When a manufacturer is deleted, it's associated cars have a null manufacturer_id" do
+    manufacturer = FactoryGirl.create(:manufacturer)
+    car = FactoryGirl.create(:car, manufacturer: manufacturer)
+    car_prev_count = Car.count
+    man_prev_count = Manufacturer.count
+
+    visit manufacturers_path
+    expect(page).to have_content("Honda")
+    expect(car.manufacturer).to eql(manufacturer)
+
+    click_on "Destroy Honda"
+    expect(Manufacturer.count).to eql(man_prev_count - 1)
+    expect(Car.count).to eql(car_prev_count)
+    car.reload
+    expect(car.manufacturer_id).to eql(nil)
+  end
 end
